@@ -1,3 +1,5 @@
+import 'package:app_transporte/features/encomiendas/presentation/buscar_encomienda_screen.dart';
+import 'package:app_transporte/shared/buscar_cliente_screen.dart';
 import 'package:app_transporte/widgets/menu_card_item.dart';
 import 'package:flutter/material.dart';
 // Importamos la tarjeta reutilizable
@@ -44,8 +46,13 @@ class MenuEncomiendasScreen extends StatelessWidget {
             title: 'Recepción de encomiendas',
             subtitle: 'Control y seguimiento de encomiendas',
             onTap: () {
-              // Aquí irá la pantalla de recepción más adelante
-              print("Ir a Recepción de Encomiendas");
+              // <-- AGREGA LA NAVEGACIÓN AQUÍ
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BuscarEncomiendaScreen(),
+                ),
+              );
             },
           ),
           

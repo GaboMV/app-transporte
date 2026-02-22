@@ -1,21 +1,25 @@
-import 'package:app_transporte/shared/reporte_pdf_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'reporte_pdf_screen.dart';
 
 class BuscarClienteScreen extends StatefulWidget {
-  const BuscarClienteScreen({super.key});
+  // Añadimos esta variable para saber si venimos de un "Por pagar"
+  final bool isVoucher; 
+
+  const BuscarClienteScreen({
+    super.key, 
+    this.isVoucher = false, // Por defecto es false (Factura normal)
+  });
 
   @override
   State<BuscarClienteScreen> createState() => _BuscarClienteScreenState();
 }
 
 class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
-  // Estados para controlar la UI
   String modoSeleccionado = 'NORMAL';
   String tipoDocumento = 'CI - CÉDULA DE IDENTIDAD';
-  bool mostrarTarjetaCliente = false; // Controla si se muestra la tarjeta de resultado
+  bool mostrarTarjetaCliente = false;
 
-  // Lista de opciones para el Dropdown (ComboBox)
   final List<String> opcionesDocumento = [
     'CI - CÉDULA DE IDENTIDAD',
     'CI EXTRANJERO',
@@ -31,7 +35,7 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
         elevation: 1,
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
-          'Emisión Factura',
+          'Emisión Factura', // O "Buscar Cliente", según prefieras
           style: TextStyle(color: Colors.black, fontSize: 18),
         ),
         actions: [
@@ -46,7 +50,6 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // --- 1. BOTONES SUPERIORES (NORMAL, 99001...) ---
             Row(
               children: [
                 _buildModoButton('NORMAL'),
@@ -57,83 +60,58 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
             ),
             const SizedBox(height: 24),
 
-            // --- 2. COMBOBOX: TIPO DE DOCUMENTO ---
             DropdownButtonFormField<String>(
               value: tipoDocumento,
               decoration: InputDecoration(
                 labelText: 'Tipo documento',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
               ),
               items: opcionesDocumento.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
+                return DropdownMenuItem<String>(value: value, child: Text(value));
               }).toList(),
               onChanged: (newValue) {
                 setState(() {
                   tipoDocumento = newValue!;
-                  // Al cambiar el tipo, ocultamos la tarjeta por si había una búsqueda anterior
                   mostrarTarjetaCliente = false; 
                 });
               },
             ),
             const SizedBox(height: 16),
 
-            // --- 3. INPUT: N° DE DOCUMENTO ---
             TextFormField(
-              maxLength: 20, // Limita a 20 caracteres y muestra el contador 0/20 automáticamente
-              keyboardType: tipoDocumento == 'CI - CÉDULA DE IDENTIDAD' 
-                  ? TextInputType.number 
-                  : TextInputType.text,
+              maxLength: 20,
+              keyboardType: tipoDocumento == 'CI - CÉDULA DE IDENTIDAD' ? TextInputType.number : TextInputType.text,
               inputFormatters: [
-                // Si es CI, bloqueamos letras. Si no, permitimos todo.
-                if (tipoDocumento == 'CI - CÉDULA DE IDENTIDAD')
-                  FilteringTextInputFormatter.digitsOnly,
+                if (tipoDocumento == 'CI - CÉDULA DE IDENTIDAD') FilteringTextInputFormatter.digitsOnly,
               ],
               decoration: InputDecoration(
                 labelText: 'N° de Documento',
                 prefixIcon: const Icon(Icons.badge, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
               ),
             ),
             const SizedBox(height: 8),
 
-            // --- 4. INPUT: COMPLEMENTO ---
             TextFormField(
-              maxLength: 2, // Limita a 2 caracteres
-              textCapitalization: TextCapitalization.characters, // Lo vuelve mayúscula automático
+              maxLength: 2,
+              textCapitalization: TextCapitalization.characters,
               decoration: InputDecoration(
                 labelText: 'Complemento',
                 prefixIcon: Container(
                   margin: const EdgeInsets.all(12),
                   padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade600,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: const Text(
-                    '2 A', 
-                    style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                  ),
+                  decoration: BoxDecoration(color: Colors.grey.shade600, borderRadius: BorderRadius.circular(4)),
+                  child: const Text('2 A', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
               ),
             ),
             const SizedBox(height: 16),
 
-            // --- 5. BOTÓN BUSCAR CLIENTE ---
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Simulamos que al presionar se encuentra el cliente
                   setState(() {
                     mostrarTarjetaCliente = true;
                   });
@@ -141,32 +119,25 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF0056A3),
                   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
                 ),
-                child: const Text(
-                  'BUSCAR CLIENTE',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                ),
+                child: const Text('BUSCAR CLIENTE', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
               ),
             ),
             const SizedBox(height: 24),
 
-            // --- 6. TARJETA DE RESULTADO DEL CLIENTE (Condicional) ---
             if (mostrarTarjetaCliente) _buildTarjetaCliente(),
           ],
         ),
       ),
       
-      // --- 7. BOTÓN FLOTANTE (FLECHA A LA DERECHA) ---
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // <-- AÑADE LA NAVEGACIÓN AQUÍ
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ReportePdfScreen(),
+              // AQUÍ LE PASAMOS LA VARIABLE A LA PANTALLA DEL PDF
+              builder: (context) => ReportePdfScreen(isVoucher: widget.isVoucher),
             ),
           );
         },
@@ -176,7 +147,6 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
     );
   }
 
-  // --- WIDGET AUXILIAR: BOTONES SUPERIORES ---
   Widget _buildModoButton(String texto) {
     bool isSelected = modoSeleccionado == texto;
     return Expanded(
@@ -186,10 +156,7 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(
-              color: isSelected ? Colors.blue : Colors.grey.shade300,
-              width: 1,
-            ),
+            border: Border.all(color: isSelected ? Colors.blue : Colors.grey.shade300, width: 1),
           ),
           alignment: Alignment.center,
           child: Text(
@@ -205,11 +172,10 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
     );
   }
 
-  // --- WIDGET AUXILIAR: TARJETA DEL CLIENTE ---
   Widget _buildTarjetaCliente() {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF8F9FA), // Un gris super claro
+        color: const Color(0xFFF8F9FA),
         borderRadius: BorderRadius.circular(8.0),
         border: Border.all(color: Colors.grey.shade300),
       ),
@@ -220,15 +186,12 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Icono de usuario
                 CircleAvatar(
                   radius: 24,
                   backgroundColor: Colors.grey.shade300,
                   child: const Icon(Icons.person, color: Colors.white, size: 32),
                 ),
                 const SizedBox(width: 16),
-                
-                // Datos del cliente
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,16 +204,10 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
                     ],
                   ),
                 ),
-                
-                // Icono de edición
-                IconButton(
-                  icon: const Icon(Icons.edit, color: Colors.black87),
-                  onPressed: () {},
-                ),
+                IconButton(icon: const Icon(Icons.edit, color: Colors.black87), onPressed: () {}),
               ],
             ),
           ),
-          // Footer de la tarjeta con el celular
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -260,10 +217,7 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
               borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8.0)),
             ),
             alignment: Alignment.center,
-            child: Text(
-              'Cel: 73225698',
-              style: TextStyle(color: Colors.grey.shade600),
-            ),
+            child: Text('Cel: 73225698', style: TextStyle(color: Colors.grey.shade600)),
           ),
         ],
       ),

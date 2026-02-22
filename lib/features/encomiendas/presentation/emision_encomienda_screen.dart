@@ -155,14 +155,17 @@ class _EmisionEncomiendaScreenState extends State<EmisionEncomiendaScreen> {
             // --- 9. BOTÓN DE EMISIÓN ---
             ElevatedButton.icon(
               onPressed: () {
-                  // <-- AÑADE ESTA NAVEGACIÓN
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BuscarClienteScreen(),
+                // Ahora SIEMPRE vamos a Buscar Cliente, 
+                // pero le avisamos si NO está pagado (!isPagado) para que sea Voucher
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BuscarClienteScreen(
+                      isVoucher: !isPagado, // Si isPagado es falso, isVoucher es true
                     ),
-                  );
-                },
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF0056A3),
                 padding: const EdgeInsets.symmetric(vertical: 16),
