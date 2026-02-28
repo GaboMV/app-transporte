@@ -20,11 +20,21 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
   String tipoDocumento = 'CI - CÉDULA DE IDENTIDAD';
   bool mostrarTarjetaCliente = false;
 
+  final TextEditingController _documentoController = TextEditingController();
+  final TextEditingController _razonSocialController = TextEditingController();
+
   final List<String> opcionesDocumento = [
     'CI - CÉDULA DE IDENTIDAD',
     'CI EXTRANJERO',
     'PASAPORTE',
   ];
+
+  @override
+  void dispose() {
+    _documentoController.dispose();
+    _razonSocialController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +90,7 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
             const SizedBox(height: 16),
 
             TextFormField(
+              controller: _documentoController,
               maxLength: 20,
               keyboardType: tipoDocumento == 'CI - CÉDULA DE IDENTIDAD' ? TextInputType.number : TextInputType.text,
               inputFormatters: [
@@ -92,6 +103,16 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
               ),
             ),
             const SizedBox(height: 8),
+
+            TextFormField(
+              controller: _razonSocialController,
+              decoration: InputDecoration(
+                labelText: 'Razón Social / Nombre',
+                prefixIcon: const Icon(Icons.person, color: Colors.grey),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
+              ),
+            ),
+            const SizedBox(height: 16),
 
             TextFormField(
               maxLength: 2,
@@ -151,7 +172,26 @@ class _BuscarClienteScreenState extends State<BuscarClienteScreen> {
     bool isSelected = modoSeleccionado == texto;
     return Expanded(
       child: GestureDetector(
-        onTap: () => setState(() => modoSeleccionado = texto),
+        onTap: () {
+          setState(() {
+            modoSeleccionado = texto;
+            if (texto == '99001' || texto == '90001' || texto == '9901') {
+              _documentoController.text = texto;
+              _razonSocialController.text = 'NOMBRE ENTIDAD EXTRANJERA';
+            } else if (texto == '99002' || texto == '90002') {
+              _documentoController.text = texto;
+              _razonSocialController.text = 'SIN NOMBRE';
+            } else if (texto == '99003' || texto == '90003') {
+              _documentoController.text = texto;
+              _razonSocialController.text = 'VENTAS MENORES';
+            } else {
+              // Si es 'NORMAL', no borramos lo que el usuario haya escrito
+              // Opcionalmente se podría limpiar: 
+              // _documentoController.clear();
+              // _razonSocialController.clear();
+            }
+          });
+        },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(

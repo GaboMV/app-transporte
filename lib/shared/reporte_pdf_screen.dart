@@ -141,6 +141,8 @@ class _ReportePdfScreenState extends State<ReportePdfScreen> {
           _buildFilaTexto('MONTO A PAGAR Bs', '100.00', isTotal: true, isBold: true),
           _buildFilaTexto('IMPORTE BASE CRÉDITO FISCAL', '100.00', isTotal: true, isBold: true),
           
+          const SizedBox(height: 24),
+          _buildBotonFinalizar(context),
           const SizedBox(height: 80),
         ],
       ),
@@ -208,6 +210,8 @@ class _ReportePdfScreenState extends State<ReportePdfScreen> {
             style: TextStyle(color: Colors.grey),
           ),
           
+          const SizedBox(height: 24),
+          _buildBotonFinalizar(context),
           const SizedBox(height: 80),
         ],
       ),
@@ -217,6 +221,25 @@ class _ReportePdfScreenState extends State<ReportePdfScreen> {
   // ==========================================================
   // WIDGETS AUXILIARES PARA EVITAR REPETIR CÓDIGO
   // ==========================================================
+
+  Widget _buildBotonFinalizar(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF0056A3),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        onPressed: () {
+          Navigator.popUntil(context, (route) => route.isFirst);
+        },
+        child: const Text('FINALIZAR', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+      ),
+    );
+  }
 
   Widget _buildLineaPunteada() {
     return Padding(
