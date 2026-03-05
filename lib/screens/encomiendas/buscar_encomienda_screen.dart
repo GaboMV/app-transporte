@@ -1,4 +1,4 @@
-import 'package:app_transporte/shared/buscar_cliente_screen.dart';
+import 'package:app_transporte/screens/shared/buscar_cliente_screen.dart';
 import 'package:flutter/material.dart';
 // Importamos la pantalla compartida de buscar cliente para cuando le demos a EMITIR
 

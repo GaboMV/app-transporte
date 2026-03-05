@@ -1,0 +1,150 @@
+﻿
+flutter : Support for 
+Android x86 targets 
+will be removed in 
+the next stable 
+release after 3.27. 
+See https://github.com
+/flutter/flutter/issue
+s/157543 for details.
+En línea: 1 Carácter: 
+1
++ flutter build apk 
+--debug > 
+build_output_5.txt 
+2>&1
++ ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo    
+          : NotSpeci  
+  fied: (Support fo   
+ r And...43 for de    
+tails.:String) []    
+, RemoteException
+    + FullyQualifiedE 
+   rrorId : NativeCo  
+  mmandError
+ 
+Running Gradle task 'assembleDebug'...                          
+lib/screens/remix/rout
+es_screen.dart:238:17:
+ Error: Can't find 
+')' to match '('.
+        Expanded(
+                ^
+lib/screens/remix/rout
+es_screen.dart:238:17:
+ Error: Too many 
+positional arguments: 
+0 allowed, but 1 
+found.
+Try removing the 
+extra positional 
+arguments.
+        Expanded(
+                ^
+../../Documents/flutte
+r/packages/flutter/lib
+/src/widgets/basic.dar
+t:5391:9: Context: 
+Found this candidate, 
+but the arguments 
+don't match.
+  const 
+Expanded({super.key, 
+super.flex, required 
+super.child}) : 
+super(fit: 
+FlexFit.tight);
+        ^^^^^^^^
+lib/screens/remix/regi
+ster_package_screen.da
+rt:271:18: Error: 
+Can't find ')' to 
+match '('.
+    return Center(
+                 ^
+lib/screens/remix/regi
+ster_package_screen.da
+rt:380:7: Error: 
+Expected an 
+identifier, but got 
+']'.
+Try inserting an 
+identifier before ']'.
+      ],
+      ^
+lib/screens/remix/regi
+ster_package_screen.da
+rt:380:7: Error: 
+Expected ')' before 
+this.
+      ],
+      ^
+lib/screens/remix/regi
+ster_package_screen.da
+rt:272:21: Error: Too 
+many positional 
+arguments: 0 allowed, 
+but 1 found.
+Try removing the 
+extra positional 
+arguments.
+      child: Padding(
+                    ^
+../../Documents/flutte
+r/packages/flutter/lib
+/src/widgets/basic.dar
+t:2070:9: Context: 
+Found this candidate, 
+but the arguments 
+don't match.
+  const 
+Padding({super.key, 
+required 
+this.padding, 
+super.child});
+        ^^^^^^^
+lib/screens/remix/buse
+s_screen.dart:179:16: 
+Error: Can't find ')' 
+to match '('.
+    return Form(
+               ^
+Target kernel_snapshot
+_program failed: 
+Exception
+
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for 
+task ':app:compileFlut
+terBuildDebug'.
+> Process 'command 'C:
+\Users\Gabo\Documents\
+flutter\bin\flutter.ba
+t'' finished with 
+non-zero exit value 1
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info or 
+--debug option to get 
+more log output.
+> Run with --scan to 
+get full insights.
+> Get more help at htt
+ps://help.gradle.org.
+
+BUILD FAILED in 5s
+Running Gradle task 'assembleDebug'...                              6,0s
+Gradle task 
+assembleDebug failed 
+with exit code 1

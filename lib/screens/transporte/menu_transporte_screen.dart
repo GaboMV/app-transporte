@@ -1,6 +1,6 @@
-import 'package:app_transporte/features/encomiendas/presentation/encomiendas_rutas_screen.dart';
-import 'package:app_transporte/features/encomiendas/presentation/menu_encomiendas_screen.dart';
-import 'package:app_transporte/features/trasnsporte/presentation/emision_factura_screen.dart';
+import 'package:app_transporte/screens/encomiendas/encomiendas_rutas_screen.dart';
+import 'package:app_transporte/screens/encomiendas/menu_encomiendas_screen.dart';
+import 'package:app_transporte/screens/transporte/emision_factura_screen.dart';
 import 'package:app_transporte/widgets/menu_card_item.dart';
 import 'package:flutter/material.dart';
 // Importamos nuestro widget personalizado

@@ -1,0 +1,80 @@
+﻿
+flutter : Support for 
+Android x86 targets 
+will be removed in 
+the next stable 
+release after 3.27. 
+See https://github.com
+/flutter/flutter/issue
+s/157543 for details.
+En línea: 1 Carácter: 
+1
++ flutter build apk 
+--debug > 
+build_output_6.txt 
+2>&1
++ ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo    
+          : NotSpeci  
+  fied: (Support fo   
+ r And...43 for de    
+tails.:String) []    
+, RemoteException
+    + FullyQualifiedE 
+   rrorId : NativeCo  
+  mmandError
+ 
+Running Gradle task 'assembleDebug'...                          
+lib/screens/remix/buse
+s_screen.dart:301:9: 
+Error: Expected an 
+identifier, but got 
+')'.
+Try inserting an 
+identifier before ')'.
+        ),
+        ^
+lib/screens/remix/buse
+s_screen.dart:301:9: 
+Error: Expected ']' 
+before this.
+        ),
+        ^
+Target kernel_snapshot
+_program failed: 
+Exception
+
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for 
+task ':app:compileFlut
+terBuildDebug'.
+> Process 'command 'C:
+\Users\Gabo\Documents\
+flutter\bin\flutter.ba
+t'' finished with 
+non-zero exit value 1
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info or 
+--debug option to get 
+more log output.
+> Run with --scan to 
+get full insights.
+> Get more help at htt
+ps://help.gradle.org.
+
+BUILD FAILED in 5s
+Running Gradle task 'assembleDebug'...                              6,2s
+Gradle task 
+assembleDebug failed 
+with exit code 1

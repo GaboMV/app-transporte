@@ -1,8 +1,8 @@
+import 'package:app_transporte/screens/encomiendas/emision_encomienda_screen.dart';
 import 'package:flutter/material.dart';
-import 'mapa_asientos_screen.dart';
 
-class EmisionFacturasScreen extends StatelessWidget {
-  const EmisionFacturasScreen({super.key});
+class EncomiendasRutasScreen extends StatelessWidget {
+  const EncomiendasRutasScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,22 +36,22 @@ class EmisionFacturasScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: const [
-          RutaCard(
+          RutaEncomiendaCard(
             origen: 'Tarija',
             destino: 'Pando',
             precio: '25.80',
-            fechaSalida: '2024-11-06 07:05:00',
-            fechaLlegada: '2024-11-07 18:11:29',
+             fechaSalida: '01/01/2024',
+            fechaLegada: '01/02/2024',
             backgroundColor: Colors.white,
           ),
           SizedBox(height: 12),
-          RutaCard(
+          RutaEncomiendaCard(
             origen: 'La Paz',
             destino: 'Yacuiba',
             precio: '25.00',
-            fechaSalida: '2024-11-07 06:52:00',
-            fechaLlegada: '2024-11-07 18:11:29',
-            backgroundColor: Color(0xFFE0E0E0),
+            fechaSalida: '01/01/2024',
+            fechaLegada: '01/02/2024',
+            backgroundColor: Color(0xFFE0E0E0), // Gris para simular la segunda tarjeta
           ),
         ],
       ),
@@ -59,33 +59,36 @@ class EmisionFacturasScreen extends StatelessWidget {
   }
 }
 
-class RutaCard extends StatelessWidget {
+// --- WIDGET REUTILIZABLE PARA LA TARJETA DE ENCOMIENDA ---
+class RutaEncomiendaCard extends StatelessWidget {
   final String origen;
   final String destino;
   final String precio;
   final String fechaSalida;
-  final String fechaLlegada;
+  final String fechaLegada;
   final Color backgroundColor;
 
-  const RutaCard({
+  const RutaEncomiendaCard({
     super.key,
     required this.origen,
     required this.destino,
     required this.precio,
-    required this.fechaSalida,
-    required this.fechaLlegada,
-    required this.backgroundColor,
+    required this.backgroundColor, 
+    required this.fechaSalida, 
+    required this.fechaLegada,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // Navegación hacia el mapa de asientos
+     onTap: () {
+        // <-- AÑADE LA NAVEGACIÓN AQUÍ
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const MapaAsientosScreen(),
+            builder: (context) => EmisionEncomiendaScreen(
+              ruta: '$origen - $destino', // Le pasamos la ruta dinámica
+            ),
           ),
         );
       },
@@ -108,8 +111,8 @@ class RutaCard extends StatelessWidget {
             _buildInfoRow('Origen:', origen),
             _buildInfoRow('Destino:', destino),
             _buildInfoRow('Precio:', precio, isBoldValue: true),
-            _buildInfoRow('Fecha Salida:', fechaSalida),
-            _buildInfoRow('Fecha Llegada:', fechaLlegada),
+             _buildInfoRow('Fecha salida:',fechaSalida),
+              _buildInfoRow('Fecha llegada:', fechaLegada),
           ],
         ),
       ),
@@ -123,7 +126,7 @@ class RutaCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 100,
+            width: 80, // Un poco más estrecho porque las palabras son cortas
             child: Text(
               label,
               style: TextStyle(

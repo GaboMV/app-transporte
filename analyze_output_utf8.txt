@@ -1,0 +1,12 @@
+﻿Analyzing app_transporte...                                     
+
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\encomiendas\encomiendas_rutas_screen.dart:103:35 - deprecated_member_use
+warning - Unused import: 'package:app_transporte/screens/shared/buscar_cliente_screen.dart' - lib\screens\encomiendas\menu_encomiendas_screen.dart:2:8 - unused_import
+   info - Don't invoke 'print' in production code - lib\screens\encomiendas\menu_encomiendas_screen.dart:66:15 - avoid_print
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\transporte\emision_factura_screen.dart:100:35 - deprecated_member_use
+  error - Target of URI doesn't exist: 'package:app_transporte/screens/trasnsporte/resumen_asientos_screen.dart' - lib\screens\transporte\mapa_asientos_screen.dart:1:8 - uri_does_not_exist
+  error - The method 'ResumenAsientosScreen' isn't defined for the type '_MapaAsientosScreenState' - lib\screens\transporte\mapa_asientos_screen.dart:167:37 - undefined_method
+  error - Target of URI doesn't exist: 'package:app_transporte/screens/trasnsporte/emision_factura_screen.dart' - lib\screens\transporte\menu_transporte_screen.dart:3:8 - uri_does_not_exist
+   info - Don't invoke 'print' in production code - lib\screens\transporte\menu_transporte_screen.dart:32:15 - avoid_print
+  error - The name 'EmisionFacturasScreen' isn't a class - lib\screens\transporte\menu_transporte_screen.dart:56:47 - creation_with_non_type
+

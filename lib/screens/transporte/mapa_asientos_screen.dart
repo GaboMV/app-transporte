@@ -1,4 +1,4 @@
-import 'package:app_transporte/features/trasnsporte/presentation/resumen_asientos_screen.dart';
+import 'package:app_transporte/screens/transporte/resumen_asientos_screen.dart';
 import 'package:flutter/material.dart';
 
 class MapaAsientosScreen extends StatefulWidget {
@@ -166,8 +166,8 @@ class _MapaAsientosScreenState extends State<MapaAsientosScreen> {
             MaterialPageRoute(
               builder: (context) => ResumenAsientosScreen(
                 cantidadAsientos: asientosSeleccionados.length,
-                ruta: 'La Paz - Yacuiba', // Esto normalmente vendría de la pantalla anterior
                 horario: '07/11/24 00:00 - 07/11/24 00:00',
+                ruta: 'La Paz - Oruro', // Dato de ejemplo para compilar
               ),
             ),
           );

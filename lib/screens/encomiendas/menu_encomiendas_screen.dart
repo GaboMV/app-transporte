@@ -1,5 +1,5 @@
-import 'package:app_transporte/features/encomiendas/presentation/buscar_encomienda_screen.dart';
-import 'package:app_transporte/shared/buscar_cliente_screen.dart';
+import 'package:app_transporte/screens/encomiendas/buscar_encomienda_screen.dart';
+import 'package:app_transporte/screens/shared/buscar_cliente_screen.dart';
 import 'package:app_transporte/widgets/menu_card_item.dart';
 import 'package:flutter/material.dart';
 // Importamos la tarjeta reutilizable
